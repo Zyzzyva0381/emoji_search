@@ -1,0 +1,22 @@
+# Local configuration and secrets
+.env
+.env.*
+env.sh
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.python-build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local image corpus and generated search indexes
+images/
+image_index.jsonl
+image_vectors.pkl
+
+# OS/editor noise
+.DS_Store

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emoji Semantic Search</title>
+    <link rel="stylesheet" href="/app/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">ES</div>
+          <div>
+            <h1>Emoji Search</h1>
+            <p>语义检索与图片管理</p>
+          </div>
+        </div>
+
+        <section class="panel compact">
+          <div class="panel-head">
+            <h2>状态</h2>
+            <button class="icon-button" id="refreshBtn" title="刷新状态" type="button">↻</button>
+          </div>
+          <div class="stats">
+            <div><span id="totalImages">0</span><label>图片</label></div>
+            <div><span id="captionedImages">0</span><label>描述</label></div>
+            <div><span id="indexedImages">0</span><label>向量</label></div>
+          </div>
+          <div class="model-line">
+            <span id="modelState">模型未加载</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>添加图片</h2>
+          <label class="drop-zone" for="fileInput">
+            <input id="fileInput" type="file" accept="image/*" multiple />
+            <span>选择图片</span>
+            <small>PNG / JPG / WebP / GIF</small>
+          </label>
+          <label class="toggle-row">
+            <input id="autoIndexInput" type="checkbox" checked />
+            <span>上传后自动索引</span>
+          </label>
+          <button class="primary" id="uploadBtn" type="button">上传</button>
+        </section>
+
+        <section class="panel">
+          <h2>索引维护</h2>
+          <div class="button-grid">
+            <button id="syncIndexBtn" type="button">同步缺失索引</button>
+            <button id="loadModelBtn" type="button">加载模型</button>
+            <button id="unloadModelBtn" type="button">卸载模型</button>
+            <button class="danger" id="deleteAllIndexBtn" type="button">删除全部索引</button>
+          </div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <section class="searchbar">
+          <div class="query-box">
+            <input id="queryInput" type="search" placeholder="搜索表情包，例如：委屈哭哭、初音未来困、理财猫猫虫" />
+            <button class="primary" id="searchBtn" type="button">搜索</button>
+          </div>
+          <div class="controls">
+            <label>Top K <input id="topKInput" type="number" min="1" max="100" value="24" /></label>
+            <label>聚合
+              <select id="scoreModeInput">
+                <option value="max">最高字段</option>
+                <option value="mean">平均</option>
+                <option value="sum">累加</option>
+              </select>
+            </label>
+          </div>
+          <div class="field-row" id="fieldRow"></div>
+        </section>
+
+        <section class="toolbar">
+          <div>
+            <h2 id="resultTitle">全部图片</h2>
+            <p id="resultMeta">加载中</p>
+          </div>
+          <button id="showAllBtn" type="button">显示全部</button>
+        </section>
+
+        <section class="grid" id="imageGrid"></section>
+      </main>
+    </div>
+
+    <dialog id="previewDialog">
+      <div class="preview-head">
+        <div>
+          <strong id="previewPath"></strong>
+          <span id="previewScore"></span>
+        </div>
+        <button class="icon-button" id="closePreviewBtn" title="关闭" type="button">×</button>
+      </div>
+      <div class="preview-body">
+        <img id="previewImage" alt="" />
+        <dl id="previewFields"></dl>
+      </div>
+      <div class="preview-actions">
+        <button id="copyPreviewBtn" type="button">复制图片</button>
+        <button class="danger" id="deletePreviewBtn" type="button">删除图片</button>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast"></div>
+    <script src="/app/app.js"></script>
+  </body>
+</html>
