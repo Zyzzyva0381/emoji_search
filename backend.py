@@ -18,9 +18,10 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+from emoji_search.config import CAPTION_INDEX_PATH, IMAGE_EXTENSIONS, IMAGES_DIR, PROJ_ROOT as ROOT, VECTOR_INDEX_PATH, VECTOR_MODEL
+from emoji_search.envfile import api_settings_from_env
 from main import describe_image
 from semantic_search import (
-    DEFAULT_MODEL,
     FIELD_NAMES,
     load_index,
     loaded_models,
@@ -33,12 +34,6 @@ from semantic_search import (
 )
 
 
-ROOT = Path(__file__).resolve().parent
-IMAGES_DIR = Path(os.getenv("EMOJI_IMAGES_DIR", ROOT / "images"))
-CAPTION_INDEX_PATH = Path(os.getenv("EMOJI_CAPTION_INDEX", ROOT / "image_index.jsonl"))
-VECTOR_INDEX_PATH = Path(os.getenv("EMOJI_VECTOR_INDEX", ROOT / "image_vectors.pkl"))
-VECTOR_MODEL = os.getenv("EMOJI_VECTOR_MODEL", DEFAULT_MODEL)
-IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp"}
 INDEX_LOCK = threading.RLock()
 
 
@@ -201,17 +196,15 @@ def remove_stale_vectors() -> int:
 
 
 def caption_image(path: Path) -> dict[str, Any]:
-    api_key = os.getenv("OPENAI_API_KEY") or os.getenv("API_KEY")
-    if not api_key:
+    settings = api_settings_from_env(ROOT / ".env")
+    if not settings["api_key"]:
         raise HTTPException(status_code=503, detail="Missing OPENAI_API_KEY or API_KEY for automatic image captioning")
-    base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
-    model = os.getenv("OPENAI_MODEL") or os.getenv("VISION_MODEL") or "gpt-4o-mini"
     item = describe_image(
         path=path,
         relative_path=relative_image_path(path),
-        base_url=base_url,
-        api_key=api_key,
-        model=model,
+        base_url=settings["base_url"],
+        api_key=settings["api_key"],
+        model=settings["model"],
         detail=os.getenv("VISION_DETAIL", "low"),
         max_tokens=int(os.getenv("VISION_MAX_TOKENS", "500")),
         use_response_format=os.getenv("VISION_NO_RESPONSE_FORMAT", "0") != "1",

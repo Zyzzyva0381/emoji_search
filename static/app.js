@@ -5,6 +5,9 @@ const fieldLabels = {
   action: "动作",
   subjective_emotion: "主观情绪",
   text_in_image: "图中文字",
+  usage_context: "使用场景",
+  wechat_keyword: "微信词",
+  manual_tags: "人工标签",
   notes: "补充",
 };
 

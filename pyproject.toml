@@ -1,14 +1,33 @@
 [project]
 name = "emoji-search"
 version = "0.1.0"
-description = "Add your description here"
+description = "Local semantic search for QQ emoji/sticker images."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.0",
     "numpy>=1.26.0",
     "openai>=2.36.0",
+    "pillow>=10.0.0",
     "python-multipart>=0.0.20",
     "sentence-transformers>=3.0.0",
     "uvicorn>=0.30.0",
 ]
+
+[project.scripts]
+emoji-search = "emoji_search.cli:main"
+emoji-catalog = "emoji_search.catalog:main"
+emoji-cluster = "emoji_search.cluster:main"
+emoji-import-folder = "emoji_search.image_folder:main"
+emoji-qwen-representatives = "emoji_search.qwen_representatives:main"
+emoji-qq-pack = "emoji_search.qq_pack:main"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["emoji_search*"]
+
+[tool.setuptools]
+py-modules = ["backend", "main", "semantic_search"]

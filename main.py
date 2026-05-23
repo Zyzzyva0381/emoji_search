@@ -13,7 +13,6 @@ import base64
 import concurrent.futures
 import json
 import mimetypes
-import os
 import random
 import sys
 import time
@@ -21,6 +20,10 @@ from pathlib import Path
 from typing import Any
 
 from openai import APIConnectionError, APIError, APITimeoutError, OpenAI
+
+from emoji_search.caption_schema import FIELD_NAMES, parse_caption_json
+from emoji_search.config import PROJ_ROOT
+from emoji_search.envfile import api_settings_from_env
 
 
 IMAGE_EXTENSIONS = {
@@ -41,6 +44,9 @@ DEFAULT_PROMPT = """请为这个表情包图片生成简短、利于语义检索
 - action: 动作
 - subjective_emotion: 主观情绪
 - text_in_image: 图中文字
+- usage_context: 适合在聊天中的什么场景使用
+- wechat_keyword: 微信表情含义词候选，不超过 4 个汉字
+- manual_tags: 人工标签，自动标注时输出 NONE
 - notes: 其他有助于检索的极短补充
 
 若某一项缺失或无法判断，输出占位符“NONE”。
@@ -55,7 +61,7 @@ DEFAULT_PROMPT = """请为这个表情包图片生成简短、利于语义检索
 
 如果表情包中有无法识别的角色、物品，或者以上提到的某项特征难以用语言描述，直接忽略或用占位符代替，不要写冗余的无关文字。
 
-只输出一个 JSON 对象，不要 Markdown，不要解释。字段值都使用简短中文。"""
+只输出一个 JSON 对象，不要 Markdown，不要解释。字段值都使用简短中文，必须是字符串，不要输出数组。"""
 
 
 class ApiRequestError(Exception):
@@ -87,6 +93,7 @@ class ApiRequestError(Exception):
 
 
 def parse_args() -> argparse.Namespace:
+    api_settings = api_settings_from_env(PROJ_ROOT / ".env")
     parser = argparse.ArgumentParser(
         description="Index images semantically by captioning them with a chat-completions vision API.",
     )
@@ -94,17 +101,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", default="image_index.jsonl", help="Output JSONL file.")
     parser.add_argument(
         "--base-url",
-        default=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"),
+        default=api_settings["base_url"],
         help="API base URL, for example https://api.openai.com/v1.",
     )
     parser.add_argument(
         "--api-key",
-        default=os.getenv("OPENAI_API_KEY") or os.getenv("API_KEY"),
+        default=api_settings["api_key"],
         help="API key. Prefer setting OPENAI_API_KEY or API_KEY in the environment.",
     )
     parser.add_argument(
         "--model",
-        default=os.getenv("OPENAI_MODEL") or os.getenv("VISION_MODEL") or "gpt-4o-mini",
+        default=api_settings["model"],
         help="Vision-capable chat model name used by your API provider.",
     )
     parser.add_argument("--workers", type=int, default=2, help="Number of concurrent API calls.")
@@ -254,28 +261,7 @@ def create_chat_completion(client: OpenAI, payload: dict[str, Any]) -> dict[str,
 
 
 def parse_caption(raw_content: str) -> tuple[dict[str, Any], str]:
-    try:
-        caption = json.loads(raw_content)
-    except json.JSONDecodeError:
-        caption = {"raw": raw_content.strip()}
-
-    fields = [
-        "image_composition",
-        "character_name",
-        "expression",
-        "action",
-        "subjective_emotion",
-        "text_in_image",
-        "notes",
-    ]
-    semantic_text = "；".join(
-        str(caption.get(field, "")).strip()
-        for field in fields
-        if str(caption.get(field, "")).strip()
-    )
-    if not semantic_text:
-        semantic_text = raw_content.strip()
-    return caption, semantic_text
+    return parse_caption_json(raw_content)
 
 
 def describe_image(

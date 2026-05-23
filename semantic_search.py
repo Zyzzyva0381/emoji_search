@@ -21,18 +21,10 @@ from typing import Any
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
+from emoji_search.caption_schema import FIELD_NAMES, PLACEHOLDERS, is_placeholder, normalize_text
+
 
 DEFAULT_MODEL = "BAAI/bge-m3"
-FIELD_NAMES = [
-    "image_composition",
-    "character_name",
-    "expression",
-    "action",
-    "subjective_emotion",
-    "text_in_image",
-    "notes",
-]
-PLACEHOLDERS = {"", "none", "NONE", "无", "未知", "null", "NULL", "N/A", "n/a"}
 _MODEL_CACHE: dict[str, SentenceTransformer] = {}
 
 
@@ -80,18 +72,6 @@ def parse_args() -> argparse.Namespace:
         help="Print JSON result objects instead of plain paths.",
     )
     return parser.parse_args()
-
-
-def normalize_text(value: Any) -> str:
-    if value is None:
-        return ""
-    if isinstance(value, str):
-        return value.strip()
-    return str(value).strip()
-
-
-def is_placeholder(value: str) -> bool:
-    return value.strip() in PLACEHOLDERS
 
 
 def load_caption_records(path: Path, fields: list[str]) -> list[CaptionRecord]:

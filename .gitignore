@@ -1,6 +1,7 @@
 # Local configuration and secrets
 .env
 .env.*
+!.env.example
 env.sh
 
 # Python caches and virtual environments
@@ -10,6 +11,7 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+*.egg-info/
 .venv/
 venv/
 
@@ -17,6 +19,12 @@ venv/
 images/
 image_index.jsonl
 image_vectors.pkl
+image_manifest.jsonl
+image_cluster_features.pkl
+image_clusters.csv
+emoji_catalog.csv
+annotation_batches/
+.data/
 
 # OS/editor noise
 .DS_Store
