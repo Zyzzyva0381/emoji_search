@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">Local web app demo</title>
+  <desc id="desc">A mock local browser management UI for searching, previewing, uploading, deleting, and syncing sticker indexes.</desc>
+  <defs>
+    <style>
+      .ui { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .title { fill: #111827; font-size: 34px; font-weight: 800; }
+      .body { fill: #374151; font-size: 22px; font-weight: 600; }
+      .muted { fill: #6b7280; font-size: 18px; }
+      .tiny { fill: #6b7280; font-size: 15px; }
+      .pill { fill: #e0f2fe; }
+      .pillText { fill: #0369a1; font-size: 15px; font-weight: 800; }
+    </style>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#64748b" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="900" fill="#f1f5f9"/>
+  <g class="ui" filter="url(#shadow)">
+    <rect x="90" y="70" width="1260" height="760" rx="24" fill="#ffffff"/>
+    <rect x="90" y="70" width="1260" height="72" rx="24" fill="#0f172a"/>
+    <rect x="90" y="118" width="1260" height="24" fill="#0f172a"/>
+    <circle cx="125" cy="106" r="9" fill="#ef4444"/>
+    <circle cx="154" cy="106" r="9" fill="#f59e0b"/>
+    <circle cx="183" cy="106" r="9" fill="#22c55e"/>
+    <text x="226" y="114" fill="#e5e7eb" font-size="23" font-weight="700">http://127.0.0.1:8000/app</text>
+
+    <text x="130" y="196" class="title">Emoji Search 本地管理页</text>
+    <rect x="130" y="230" width="720" height="62" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="158" y="270" class="muted">搜索：无语、摆烂、摸鱼、龙年好...</text>
+    <rect x="872" y="230" width="132" height="62" rx="14" fill="#111827"/>
+    <text x="911" y="269" fill="#f8fafc" font-size="22" font-weight="800">Search</text>
+    <rect x="1024" y="230" width="148" height="62" rx="14" fill="#e0f2fe"/>
+    <text x="1057" y="269" fill="#0369a1" font-size="21" font-weight="800">Sync Index</text>
+    <rect x="1190" y="230" width="118" height="62" rx="14" fill="#dcfce7"/>
+    <text x="1224" y="269" fill="#166534" font-size="21" font-weight="800">Upload</text>
+
+    <g transform="translate(130 332)">
+      <rect x="0" y="0" width="275" height="390" rx="18" fill="#f8fafc" stroke="#e5e7eb"/>
+      <rect x="28" y="28" width="219" height="166" rx="14" fill="#ecfccb"/>
+      <circle cx="138" cy="105" r="56" fill="#bef264"/>
+      <circle cx="119" cy="90" r="14" fill="#111827"/>
+      <circle cx="157" cy="90" r="14" fill="#111827"/>
+      <text x="28" y="236" class="body">摆烂中</text>
+      <text x="28" y="268" class="muted">score 0.94 · manual_tags</text>
+      <rect x="28" y="294" width="66" height="30" rx="8" class="pill"/>
+      <text x="43" y="315" class="pillText">躺平</text>
+      <rect x="104" y="294" width="66" height="30" rx="8" class="pill"/>
+      <text x="119" y="315" class="pillText">摸鱼</text>
+      <rect x="180" y="294" width="66" height="30" rx="8" class="pill"/>
+      <text x="195" y="315" class="pillText">周一</text>
+    </g>
+    <g transform="translate(430 332)">
+      <rect x="0" y="0" width="275" height="390" rx="18" fill="#f8fafc" stroke="#e5e7eb"/>
+      <rect x="28" y="28" width="219" height="166" rx="14" fill="#fff7ed"/>
+      <rect x="78" y="61" width="120" height="100" rx="18" fill="#fb923c"/>
+      <text x="58" y="126" fill="#7c2d12" font-size="45" font-weight="900">收到</text>
+      <text x="28" y="236" class="body">收到</text>
+      <text x="28" y="268" class="muted">score 0.91 · text_in_image</text>
+      <rect x="28" y="294" width="66" height="30" rx="8" class="pill"/>
+      <text x="43" y="315" class="pillText">确认</text>
+      <rect x="104" y="294" width="88" height="30" rx="8" class="pill"/>
+      <text x="119" y="315" class="pillText">已读</text>
+    </g>
+    <g transform="translate(730 332)">
+      <rect x="0" y="0" width="275" height="390" rx="18" fill="#f8fafc" stroke="#e5e7eb"/>
+      <rect x="28" y="28" width="219" height="166" rx="14" fill="#f0f9ff"/>
+      <path d="M80 150 C120 42 190 42 205 150" fill="none" stroke="#0284c7" stroke-width="18" stroke-linecap="round"/>
+      <text x="28" y="236" class="body">起飞</text>
+      <text x="28" y="268" class="muted">score 0.88 · usage_context</text>
+      <rect x="28" y="294" width="66" height="30" rx="8" class="pill"/>
+      <text x="43" y="315" class="pillText">冲刺</text>
+      <rect x="104" y="294" width="66" height="30" rx="8" class="pill"/>
+      <text x="119" y="315" class="pillText">加速</text>
+    </g>
+    <g transform="translate(1030 332)">
+      <rect x="0" y="0" width="275" height="390" rx="18" fill="#f8fafc" stroke="#e5e7eb"/>
+      <rect x="28" y="28" width="219" height="166" rx="14" fill="#f5f3ff"/>
+      <circle cx="138" cy="105" r="58" fill="#c4b5fd"/>
+      <path d="M105 116 Q138 88 171 116" fill="none" stroke="#312e81" stroke-width="12" stroke-linecap="round"/>
+      <text x="28" y="236" class="body">无语</text>
+      <text x="28" y="268" class="muted">score 0.86 · emotion</text>
+      <rect x="28" y="294" width="66" height="30" rx="8" class="pill"/>
+      <text x="43" y="315" class="pillText">吐槽</text>
+      <rect x="104" y="294" width="88" height="30" rx="8" class="pill"/>
+      <text x="119" y="315" class="pillText">沉默</text>
+    </g>
+    <text x="130" y="776" class="tiny">本地 FastAPI 服务 · 图片、向量、CSV 全部留在本机</text>
+  </g>
+</svg>

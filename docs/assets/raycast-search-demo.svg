@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">Raycast sticker search demo</title>
+  <desc id="desc">A mock Raycast extension search screen showing local sticker results, thumbnails, semantic score, and metadata.</desc>
+  <defs>
+    <style>
+      .ui { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .muted { fill: #9ca3af; }
+      .text { fill: #f5f5f5; }
+      .small { font-size: 24px; }
+      .body { font-size: 28px; font-weight: 600; }
+      .label { font-size: 25px; font-weight: 700; fill: #a3a3a3; }
+      .value { font-size: 25px; font-weight: 700; fill: #f5f5f5; }
+      .tag { fill: #1f6feb; }
+      .tagText { fill: #7cc2ff; font-size: 22px; font-weight: 700; }
+    </style>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#000" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" fill="#eef2f7"/>
+  <g class="ui" filter="url(#shadow)">
+    <rect x="70" y="58" width="1300" height="784" rx="28" fill="#18181b"/>
+    <rect x="70" y="58" width="1300" height="784" rx="28" fill="none" stroke="#3f3f46" stroke-width="2"/>
+    <rect x="70" y="58" width="1300" height="98" rx="28" fill="#1f1f23"/>
+    <rect x="70" y="129" width="1300" height="27" fill="#1f1f23"/>
+    <line x1="70" y1="156" x2="1370" y2="156" stroke="#3f3f46" stroke-width="2"/>
+    <line x1="560" y1="156" x2="560" y2="842" stroke="#3f3f46" stroke-width="2"/>
+    <text x="112" y="120" class="text" font-size="40" font-weight="700">摆烂</text>
+    <rect x="96" y="78" width="54" height="54" rx="18" fill="#3f3f46"/>
+    <path d="M130 94 L110 105 L130 116" fill="none" stroke="#f4f4f5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g transform="translate(96 204)">
+      <g>
+        <rect x="0" y="0" width="420" height="78" rx="18" fill="#303036"/>
+        <rect x="18" y="17" width="44" height="44" rx="8" fill="#fff7ed"/>
+        <circle cx="40" cy="38" r="15" fill="#f97316"/>
+        <text x="82" y="48" class="body">摆烂</text>
+        <text x="194" y="47" class="muted small">躺平、放弃努力</text>
+        <rect x="314" y="15" width="86" height="48" rx="10" fill="#17335c"/>
+        <text x="332" y="47" class="tagText">text</text>
+      </g>
+      <g transform="translate(0 100)">
+        <rect x="18" y="17" width="44" height="44" rx="8" fill="#ecfeff"/>
+        <circle cx="39" cy="39" r="17" fill="#22c55e"/>
+        <text x="82" y="48" class="body">不想动</text>
+        <text x="194" y="47" class="muted small">拒绝内卷</text>
+        <rect x="314" y="15" width="86" height="48" rx="10" fill="#17335c"/>
+        <text x="326" y="47" class="tagText">usage</text>
+      </g>
+      <g transform="translate(0 200)">
+        <rect x="18" y="17" width="44" height="44" rx="8" fill="#fefce8"/>
+        <circle cx="40" cy="40" r="15" fill="#eab308"/>
+        <text x="82" y="48" class="body">累了</text>
+        <text x="194" y="47" class="muted small">心累、下线</text>
+        <rect x="314" y="15" width="86" height="48" rx="10" fill="#17335c"/>
+        <text x="326" y="47" class="tagText">tags</text>
+      </g>
+      <g transform="translate(0 300)">
+        <rect x="18" y="17" width="44" height="44" rx="8" fill="#f5f3ff"/>
+        <circle cx="40" cy="40" r="15" fill="#8b5cf6"/>
+        <text x="82" y="48" class="body">随便吧</text>
+        <text x="194" y="47" class="muted small">敷衍回应</text>
+        <rect x="314" y="15" width="86" height="48" rx="10" fill="#17335c"/>
+        <text x="326" y="47" class="tagText">emotion</text>
+      </g>
+      <g transform="translate(0 400)">
+        <rect x="18" y="17" width="44" height="44" rx="8" fill="#f0fdf4"/>
+        <circle cx="40" cy="40" r="15" fill="#16a34a"/>
+        <text x="82" y="48" class="body">摸鱼中</text>
+        <text x="194" y="47" class="muted small">暂停工作</text>
+        <rect x="314" y="15" width="86" height="48" rx="10" fill="#17335c"/>
+        <text x="326" y="47" class="tagText">manual</text>
+      </g>
+    </g>
+
+    <g transform="translate(610 178)">
+      <rect x="0" y="0" width="710" height="370" rx="8" fill="#f8fafc"/>
+      <rect x="80" y="46" width="550" height="278" rx="26" fill="#ecfccb"/>
+      <circle cx="354" cy="178" r="108" fill="#bef264"/>
+      <circle cx="316" cy="155" r="28" fill="#111827"/>
+      <circle cx="392" cy="155" r="28" fill="#111827"/>
+      <path d="M318 228 Q354 260 390 228" fill="none" stroke="#111827" stroke-width="14" stroke-linecap="round"/>
+      <text x="196" y="92" fill="#365314" font-size="58" font-weight="800" transform="rotate(-7 196 92)">摆烂中</text>
+    </g>
+    <line x1="560" y1="548" x2="1370" y2="548" stroke="#3f3f46" stroke-width="2"/>
+
+    <g transform="translate(612 602)">
+      <text x="0" y="0" class="label">Score</text>
+      <text x="704" y="0" text-anchor="end" class="value">0.94</text>
+      <text x="0" y="58" class="label">Best Field</text>
+      <text x="704" y="58" text-anchor="end" class="value">manual_tags</text>
+      <line x1="0" y1="88" x2="704" y2="88" stroke="#3f3f46" stroke-width="2"/>
+      <text x="0" y="138" class="label">微信含义词</text>
+      <text x="704" y="138" text-anchor="end" class="value">摆烂</text>
+      <text x="0" y="196" class="label">人工标签</text>
+      <text x="704" y="196" text-anchor="end" class="value">摸鱼; 躺平; 周一</text>
+      <text x="0" y="254" class="label">场景</text>
+      <text x="704" y="254" text-anchor="end" class="value">表达放弃挣扎或轻松自嘲</text>
+    </g>
+
+    <rect x="70" y="768" width="1300" height="74" rx="0" fill="#25272b"/>
+    <text x="120" y="816" class="body">Search Emoji</text>
+    <text x="998" y="816" class="body">Copy Image</text>
+    <rect x="1130" y="788" width="54" height="42" rx="12" fill="#3f3f46"/>
+    <text x="1146" y="818" class="muted small">↩</text>
+    <text x="1216" y="816" class="muted body">Actions</text>
+    <rect x="1310" y="788" width="44" height="42" rx="12" fill="#3f3f46"/>
+    <text x="1322" y="818" class="muted small">⌘K</text>
+  </g>
+</svg>

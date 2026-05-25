@@ -2,6 +2,18 @@
 
 本项目是一个本地表情包语义检索工具：把图片整理到 `images/`，为每张图片生成结构化中文描述，再用向量模型做字段级语义搜索。
 
+## 预览
+
+这些示例图是公开推广用的 mock 数据，不包含本地私有表情或聊天对象信息。
+
+![Raycast 搜索示例](docs/assets/raycast-search-demo.svg)
+
+![本地 Web 管理页示例](docs/assets/local-web-demo.svg)
+
+![人工标签 CSV 示例](docs/assets/catalog-review-demo.svg)
+
+![本地优先工作流示例](docs/assets/workflow-demo.svg)
+
 ## 当前状态
 
 - 后端：`backend.py` 提供 FastAPI 接口，包含图片列表、上传/删除、caption、向量索引、搜索、模型加载/卸载。
