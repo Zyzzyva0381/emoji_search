@@ -14,6 +14,8 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
+node_modules/
+raycast/**/raycast-env.d.ts
 
 # Local image corpus and generated search indexes
 images/

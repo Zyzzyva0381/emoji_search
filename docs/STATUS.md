@@ -17,6 +17,7 @@ Date: 2026-05-23
 - Human-editable CSV catalog export/apply CLI in `emoji_search.catalog`.
 - Local CLIP-based pre-classification and clustering CLI in `emoji_search.cluster`.
 - Qwen cluster-representative captioning CLI in `emoji_search.qwen_representatives`.
+- Local Raycast extension in `raycast/emoji-search` for desktop search, preview, copy, paste, and catalog/index actions.
 
 ## Local Data Finding
 
@@ -45,7 +46,7 @@ Observed local import shape:
 2. Add private aliases for real classmates or local memes in `manual_tags`.
 3. Run `uv run python -m emoji_search.catalog apply emoji_catalog.csv --caption-index image_index.jsonl`.
 4. Rebuild `image_vectors.pkl`.
-5. Open the FastAPI app and check search quality on common queries.
+5. Open the FastAPI app or Raycast extension and check search quality on common queries.
 
 ## Engineering Gaps
 

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "emoji-search",
+  "title": "Emoji Search",
+  "description": "Search and paste local QQ/WeChat stickers from the emoji_search FastAPI service.",
+  "icon": "command-icon.png",
+  "author": "adam",
+  "license": "MIT",
+  "categories": [
+    "Productivity"
+  ],
+  "commands": [
+    {
+      "name": "search-emoji",
+      "title": "Search Emoji",
+      "description": "Search local sticker captions and paste or copy the image.",
+      "mode": "view"
+    },
+    {
+      "name": "open-catalog",
+      "title": "Open Emoji Catalog",
+      "description": "Open the local CSV catalog for manual tags.",
+      "mode": "no-view"
+    },
+    {
+      "name": "sync-index",
+      "title": "Sync Emoji Index",
+      "description": "Ask the local backend to sync missing and stale vectors.",
+      "mode": "no-view"
+    }
+  ],
+  "preferences": [
+    {
+      "name": "apiBaseUrl",
+      "title": "API Base URL",
+      "description": "FastAPI base URL for emoji_search.",
+      "type": "textfield",
+      "required": true,
+      "default": "http://127.0.0.1:8000"
+    },
+    {
+      "name": "projectRoot",
+      "title": "Project Root",
+      "description": "Optional absolute path to the emoji_search project. Leave blank when running this extension from raycast/emoji-search.",
+      "type": "textfield",
+      "required": false
+    },
+    {
+      "name": "topK",
+      "title": "Result Count",
+      "description": "Maximum results returned from semantic search.",
+      "type": "textfield",
+      "required": false,
+      "default": "20"
+    }
+  ],
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "fix-lint": "ray lint --fix",
+    "lint": "ray lint"
+  },
+  "dependencies": {
+    "@raycast/api": "^1.104.18",
+    "@raycast/utils": "^2.2.5"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^2.1.1",
+    "@types/node": "^24.10.1",
+    "typescript": "^5.9.3"
+  }
+}

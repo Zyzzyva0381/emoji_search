@@ -173,6 +173,22 @@ uv run python -m emoji_search.catalog apply emoji_catalog.csv \
 
 优先做 Raycast extension：它更适合这个项目的搜索结果列表、缩略图、快捷操作和复制文件到剪贴板。Alfred 也能通过 Script Filter 做，但更适合纯文本/路径型 workflow。
 
+本仓库已经带了一个本地 Raycast extension：
+
+```bash
+cd raycast/emoji-search
+npm install
+npm run dev
+```
+
+首次运行后，Raycast 根搜索里会出现 `Emoji Search` 分组，包含：
+
+- `Search Emoji`：输入自然语言，查看缩略图、语义字段、人工标签和分数。
+- `Open Emoji Catalog`：打开 `emoji_catalog.csv`，用于人工补标签。
+- `Sync Emoji Index`：调用本地后端同步缺失或过期向量。
+
+使用 `Search Emoji` 时，回车默认复制图片文件到剪贴板，`Cmd+Enter` 才会粘贴到当前前台应用。这样可以先在 Raycast 里确认结果，再决定是否发到 QQ/微信。
+
 推荐插件目标：
 
 - 输入自然语言查询。
