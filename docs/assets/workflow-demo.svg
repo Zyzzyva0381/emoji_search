@@ -61,7 +61,7 @@
       <text x="232" y="634" fill="#cbd5e1" font-size="22" font-weight="650">进入 Git：代码、CLI、Raycast 扩展、文档、示例图</text>
       <text x="232" y="674" fill="#cbd5e1" font-size="22" font-weight="650">留在本机：图片、caption、向量索引、人工 CSV、.env</text>
       <rect x="952" y="572" width="220" height="72" rx="18" fill="#dcfce7"/>
-      <text x="1000" y="617" fill="#166534" font-size="24" font-weight="850">可公开推广</text>
+      <text x="1000" y="617" fill="#166534" font-size="24" font-weight="850">代码可复用</text>
     </g>
   </g>
 </svg>

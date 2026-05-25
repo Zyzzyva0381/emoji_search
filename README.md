@@ -4,9 +4,9 @@
 
 ## 预览
 
-这些示例图是公开推广用的 mock 数据，不包含本地私有表情或聊天对象信息。
+主图是一次真实 Raycast 搜索截图，用来展示实际检索、预览和复制表情的效果；其余图是辅助说明的 mock 图。
 
-![Raycast 搜索示例](docs/assets/raycast-search-demo.svg)
+![Raycast 实际搜索效果](docs/assets/raycast-real-search-demo.png)
 
 ![本地 Web 管理页示例](docs/assets/local-web-demo.svg)
 
