@@ -38,13 +38,14 @@ Commands:
 Default action policy:
 
 - `Enter`: copy image file to the clipboard.
-- `Cmd+Enter`: paste image file into the frontmost app.
+- `Cmd+Shift+P`: paste image file into the frontmost app.
 - Action panel: copy path, copy tags, open preview, open image, reveal in Finder, sync index.
+- Copy/paste first resolves the image under `Project Root`; if no valid local root is configured, it downloads the local FastAPI preview image to a temporary cache and uses that file.
 
 Local preferences:
 
 - `API Base URL`: defaults to `http://127.0.0.1:8000`.
-- `Project Root`: optional. Leave blank when running from `raycast/emoji-search`.
+- `Project Root`: optional for copy/paste, required for `Open Emoji Catalog` and useful for real Finder paths.
 - `Result Count`: defaults to `20`.
 
 ## Alfred Workflow Shape

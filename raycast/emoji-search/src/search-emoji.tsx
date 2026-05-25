@@ -15,12 +15,12 @@ import {
   absoluteImagePath,
   apiBaseUrl,
   copyImage,
-  openFile,
+  openImage,
   pasteImage,
   postJson,
   preferences,
   projectRoot,
-  revealInFinder,
+  revealImage,
   resultMarkdown,
   resultSubtitle,
   resultTitle,
@@ -89,7 +89,7 @@ export default function SearchEmoji() {
   if (error) {
     return (
       <Detail
-        markdown={`# Emoji Search 连接失败\n\n\`${error}\`\n\n先启动本地服务：\n\n\`\`\`bash\ncd ${projectRoot()}\nuv run uvicorn backend:app --reload\n\`\`\``}
+        markdown={`# Emoji Search 连接失败\n\n\`${error}\`\n\n先启动本地服务：\n\n\`\`\`bash\ncd ${projectRoot() || "/path/to/emoji_search"}\nuv run uvicorn backend:app --reload\n\`\`\``}
         actions={
           <ActionPanel>
             <Action.OpenInBrowser
@@ -131,7 +131,6 @@ export default function SearchEmoji() {
 }
 
 function EmojiItem({ result }: { result: SearchResult }) {
-  const filePath = absoluteImagePath(result.path);
   const fields = result.fields;
 
   return (
@@ -156,19 +155,19 @@ function EmojiItem({ result }: { result: SearchResult }) {
             <Action
               title="Copy Image"
               icon={Icon.CopyClipboard}
-              onAction={() => copyImage(filePath)}
+              onAction={() => copyImage(result)}
             />
             <Action
               title="Paste Image"
               icon={Icon.Clipboard}
-              shortcut={{ modifiers: ["cmd"], key: "enter" }}
-              onAction={() => pasteImage(filePath)}
+              shortcut={{ modifiers: ["cmd", "shift"], key: "p" }}
+              onAction={() => pasteImage(result)}
             />
           </ActionPanel.Section>
           <ActionPanel.Section>
             <Action.CopyToClipboard
               title="Copy Path"
-              content={filePath}
+              content={absoluteImagePath(result.path)}
               shortcut={{ modifiers: ["cmd", "shift"], key: "c" }}
             />
             <Action.CopyToClipboard
@@ -182,13 +181,13 @@ function EmojiItem({ result }: { result: SearchResult }) {
             <Action
               title="Open Image"
               icon={Icon.Image}
-              onAction={() => openFile(filePath)}
+              onAction={() => openImage(result)}
             />
             <Action
               title="Reveal in Finder"
               icon={Icon.Finder}
               shortcut={Keyboard.Shortcut.Common.Open}
-              onAction={() => revealInFinder(filePath)}
+              onAction={() => revealImage(result)}
             />
             <Action
               title="Sync Index"

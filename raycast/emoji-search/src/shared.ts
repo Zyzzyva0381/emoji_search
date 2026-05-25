@@ -1,5 +1,8 @@
 import { Clipboard, Toast, getPreferenceValues, showToast } from "@raycast/api";
+import crypto from "node:crypto";
 import { execFile } from "node:child_process";
+import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
 
@@ -41,20 +44,29 @@ export function apiBaseUrl(): string {
   return preferences().apiBaseUrl.replace(/\/+$/, "");
 }
 
-export function projectRoot(): string {
+export function configuredProjectRoot(): string | undefined {
   const explicitRoot = preferences().projectRoot?.trim();
   if (explicitRoot) {
     return explicitRoot;
   }
-  return path.resolve(process.cwd(), "../..");
+  return undefined;
+}
+
+export function projectRoot(): string {
+  return configuredProjectRoot() || fallbackProjectRoot() || "";
 }
 
 export function absoluteImagePath(relativePath: string): string {
-  return path.resolve(projectRoot(), relativePath);
+  const root = projectRoot();
+  return root ? path.resolve(root, relativePath) : relativePath;
 }
 
 export function catalogPath(): string {
-  return path.resolve(projectRoot(), "emoji_catalog.csv");
+  const root = projectRoot();
+  if (!root) {
+    throw new Error("请在 Raycast 扩展偏好里设置 Project Root");
+  }
+  return path.resolve(root, "emoji_catalog.csv");
 }
 
 export function resultTitle(result: SearchResult): string {
@@ -97,13 +109,23 @@ export function resultMarkdown(result: SearchResult): string {
   return lines.join("\n");
 }
 
-export async function copyImage(filePath: string): Promise<void> {
+export async function copyImage(result: SearchResult): Promise<void> {
+  const filePath = await fileForImageAction(result);
   await Clipboard.copy({ file: filePath });
   await showToast({ style: Toast.Style.Success, title: "已复制图片" });
 }
 
-export async function pasteImage(filePath: string): Promise<void> {
+export async function pasteImage(result: SearchResult): Promise<void> {
+  const filePath = await fileForImageAction(result);
   await Clipboard.paste({ file: filePath });
+}
+
+export async function openImage(result: SearchResult): Promise<void> {
+  await openFile(await fileForImageAction(result));
+}
+
+export async function revealImage(result: SearchResult): Promise<void> {
+  await revealInFinder(await fileForImageAction(result));
 }
 
 export async function revealInFinder(filePath: string): Promise<void> {
@@ -131,6 +153,56 @@ export async function postJson<T>(url: string, body: unknown): Promise<T> {
 function fieldLine(label: string, value?: string): string {
   const text = clean(value);
   return text ? `**${label}**: ${text}` : "";
+}
+
+async function fileForImageAction(result: SearchResult): Promise<string> {
+  const localPath = await existingLocalImagePath(result.path);
+  return localPath || downloadPreviewToCache(result);
+}
+
+async function existingLocalImagePath(
+  relativePath: string,
+): Promise<string | undefined> {
+  const roots = [configuredProjectRoot(), fallbackProjectRoot()].filter(
+    Boolean,
+  ) as string[];
+  for (const root of roots) {
+    try {
+      return await fs.realpath(path.resolve(root, relativePath));
+    } catch {
+      // Try the next possible root.
+    }
+  }
+  return undefined;
+}
+
+async function downloadPreviewToCache(result: SearchResult): Promise<string> {
+  const cacheDir = path.join(os.tmpdir(), "emoji-search-raycast");
+  await fs.mkdir(cacheDir, { recursive: true });
+  const ext = path.extname(result.path) || ".png";
+  const hash = crypto.createHash("sha1").update(result.path).digest("hex");
+  const outputPath = path.join(cacheDir, `${hash}${ext}`);
+
+  try {
+    await fs.access(outputPath);
+    return outputPath;
+  } catch {
+    // Cache miss; download from the local FastAPI image endpoint.
+  }
+
+  const response = await fetch(`${apiBaseUrl()}${result.url}`);
+  if (!response.ok) {
+    throw new Error(
+      `无法下载图片预览 ${response.status} ${response.statusText}`,
+    );
+  }
+  await fs.writeFile(outputPath, Buffer.from(await response.arrayBuffer()));
+  return outputPath;
+}
+
+function fallbackProjectRoot(): string | undefined {
+  const root = path.resolve(process.cwd(), "../..");
+  return root === "/" ? undefined : root;
 }
 
 function clean(value?: string): string {

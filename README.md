@@ -187,14 +187,14 @@ npm run dev
 - `Open Emoji Catalog`：打开 `emoji_catalog.csv`，用于人工补标签。
 - `Sync Emoji Index`：调用本地后端同步缺失或过期向量。
 
-使用 `Search Emoji` 时，回车默认复制图片文件到剪贴板，`Cmd+Enter` 才会粘贴到当前前台应用。这样可以先在 Raycast 里确认结果，再决定是否发到 QQ/微信。
+使用 `Search Emoji` 时，回车默认复制图片文件到剪贴板，`Cmd+Shift+P` 才会粘贴到当前前台应用。这样可以先在 Raycast 里确认结果，再决定是否发到 QQ/微信。复制/粘贴会优先使用本地 `Project Root` 下的原图；如果 Raycast 没有拿到项目路径，会从本地 FastAPI 的 `/images/...` 预览地址下载到临时目录后再复制。`Open Emoji Catalog` 和 `Reveal in Finder` 需要在 Raycast 扩展偏好里填写 `Project Root`。
 
 推荐插件目标：
 
 - 输入自然语言查询。
 - 显示表情缩略图、微信含义词、人工标签、使用场景。
 - 回车复制图片文件到剪贴板。
-- `Cmd+Enter` 粘贴到前台 QQ/微信。
+- `Cmd+Shift+P` 粘贴到前台 QQ/微信。
 - `Cmd+K` 或 action panel 打开原图、复制路径、复制标签。
 
 ## 微信表情准备

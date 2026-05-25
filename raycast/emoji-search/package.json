@@ -41,7 +41,7 @@
     {
       "name": "projectRoot",
       "title": "Project Root",
-      "description": "Optional absolute path to the emoji_search project. Leave blank when running this extension from raycast/emoji-search.",
+      "description": "Optional absolute path to the emoji_search project. Copy/paste can fall back to the local API; catalog and Finder actions need this for real local paths.",
       "type": "textfield",
       "required": false
     },
